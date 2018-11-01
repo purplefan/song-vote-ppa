@@ -17,14 +17,14 @@ class Song
     private $score;
 
     /**
-     * @var array
+     * @var string
      */
     private $songDetails;
 
     /**
-     * Song constructor.
+     * @param string $songDetails
      */
-    public function __construct($songDetails)
+    public function __construct(string $songDetails)
     {
         $this->songDetails = $songDetails;
     }
@@ -34,12 +34,12 @@ class Song
         return $this->score;
     }
 
-    public function songDetails()
+    public function songDetails(): string
     {
         return $this->songDetails;
     }
 
-    public function vote(float $score)
+    public function vote(int $score)
     {
         if ($score < 1 || $score > 10) {
             throw new ScoreOutOfBoundsException();
