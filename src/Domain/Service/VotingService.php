@@ -27,7 +27,12 @@ class VotingService
         $this->voteRepository = $voteRepository;
     }
 
-
+    /**
+     * @param int $id
+     * @param int $score
+     *
+     * @return string
+     */
     public function vote(int $id, int $score)
     {
         $song = $this->songRepository->findSong($id);
