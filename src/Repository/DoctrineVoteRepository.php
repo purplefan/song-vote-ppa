@@ -4,19 +4,16 @@ namespace App\Repository;
 
 use App\Domain\Entity\Song;
 use App\Domain\Repository\VoteRepositoryInterface;
-use Doctrine\ORM\EntityManager;
+use Doctrine\ORM\EntityManagerInterface;
 
 class DoctrineVoteRepository implements VoteRepositoryInterface
 {
     /**
-     * @var EntityManager
+     * @var EntityManagerInterface
      */
     private $entityManager;
 
-    /**
-     * DoctrineWarehouseRepository constructor.
-     */
-    public function __construct(EntityManager $entityManager)
+    public function __construct(EntityManagerInterface $entityManager)
     {
         $this->entityManager = $entityManager;
     }
