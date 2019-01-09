@@ -10,6 +10,19 @@ use Symfony\Component\Routing\Annotation\Route;
 class VoteController
 {
     /**
+     * @var VotingService $votingService
+     */
+    private $votingService;
+
+    /**
+     * @param VotingService $votingService
+     */
+    public function __construct(VotingService $votingService)
+    {
+        $this->votingService = $votingService;
+    }
+
+    /**
      * @Route("/list")
      *
      * @return JsonResponse
@@ -20,12 +33,15 @@ class VoteController
     }
 
     /**
-     * @Route("/vote")
+     * @Route("/vote/{songId}/{score}")
      *
-     * @param VotingService $votingService
+     * @param int $songId
+     * @param int $score
+     *
+     * @return JsonResponse
      */
-    public function voteSong(VotingService $votingService)
+    public function voteSong(int $songId, int $score)
     {
-        return new JsonResponse($votingService->vote(1,10));
+        return new JsonResponse($this->votingService->vote($songId, $score));
     }
 }
