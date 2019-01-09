@@ -17,21 +17,33 @@ class Song
     private $score;
 
     /**
+     * @var int
+     */
+    private $songId;
+
+    /**
      * @var string
      */
     private $songDetails;
 
     /**
+     * @param int $songId
      * @param string $songDetails
      */
-    public function __construct(string $songDetails)
+    public function __construct(int $songId, string $songDetails)
     {
+        $this->songId = $songId;
         $this->songDetails = $songDetails;
     }
 
     public function score(): ?float
     {
         return $this->score;
+    }
+
+    public function songId(): int
+    {
+        return $this->songId;
     }
 
     public function songDetails(): string

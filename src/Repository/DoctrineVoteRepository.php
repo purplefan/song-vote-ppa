@@ -23,4 +23,14 @@ class DoctrineVoteRepository implements VoteRepositoryInterface
         $this->entityManager->persist($song);
         $this->entityManager->flush();
     }
+
+    public function findSong(int $songId): ?Song
+    {
+        return $this->entityManager->getRepository(Song::class)->findOneBy(['songId' => $songId]);
+    }
+
+    public function findAll(): ?array
+    {
+        return $this->entityManager->getRepository(Song::class)->findAll();
+    }
 }

@@ -23,7 +23,7 @@ class VoteController
     }
 
     /**
-     * @Route("/list")
+     * @Route("/songs/list")
      *
      * @return JsonResponse
      */
@@ -43,5 +43,15 @@ class VoteController
     public function voteSong(int $songId, int $score)
     {
         return new JsonResponse($this->votingService->vote($songId, $score));
+    }
+
+    /**
+     * @Route("/votes/list")
+     *
+     * @return JsonResponse
+     */
+    public function listVotes()
+    {
+        return new JsonResponse($this->votingService->getVotes());
     }
 }

@@ -20,7 +20,8 @@ $ php bin/console server:run
 ```
 Endpoints:
 ```
-http://127.0.0.1:8000/list
+http://127.0.0.1:8000/songs/list
 http://127.0.0.1:8000/vote/{songId}/{score} eg. http://127.0.0.1:8000/vote/1/9
+http://127.0.0.1:8000/votes/list
 
 ```

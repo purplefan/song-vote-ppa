@@ -3,6 +3,7 @@
 namespace App\Tests\Domain\Service;
 
 use App\Domain\Entity\Song;
+use App\Domain\Exception\SongNotFoundException;
 use App\Domain\Repository\SongRepositoryInterface;
 use App\Domain\Repository\VoteRepositoryInterface;
 use App\Domain\Service\VotingService;
@@ -33,17 +34,38 @@ class VotingServiceTest extends TestCase
         $this->votingService = new VotingService($this->songRepository, $this->voteRepository);
     }
 
-    public function testIfVoteIsStored()
+    public function testIfVoteIsStoredAndSongExistsInVoteRepository()
     {
         $id = 1;
         $score = 4;
         $song = new Song("some song");
+        $this->voteRepository->expects($this->once())->method('findSong')->with($id)->willReturn($song);
+        $this->voteRepository->expects($this->once())
+            ->method('saveVote')
+            ->with($song);
+        $this->assertEquals("success", $this->votingService->vote($id, $score));
+    }
+
+    public function testIfVoteIsStoredAndSongNOTExistsInVoteRepository()
+    {
+        $id = 1;
+        $score = 4;
+        $song = new Song("some song");
+        $this->voteRepository->expects($this->once())->method('findSong')->with($id)->willReturn(null);
         $this->songRepository->expects($this->once())->method('findSong')->with($id)->willReturn($song);
         $this->voteRepository->expects($this->once())
             ->method('saveVote')
             ->with($song);
         $this->assertEquals("success", $this->votingService->vote($id, $score));
+    }
 
-
+    public function testIfSongNOTExitstThrowsException()
+    {
+        $id = 1;
+        $score = 4;
+        $this->voteRepository->expects($this->once())->method('findSong')->with($id)->willReturn(null);
+        $this->songRepository->expects($this->once())->method('findSong')->with($id)->willReturn(null);
+        $this->expectException(SongNotFoundException::class);
+        $this->votingService->vote($id, $score);
     }
 }

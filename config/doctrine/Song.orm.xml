@@ -6,6 +6,7 @@
         <id name="id" type="integer" column="id">
             <generator strategy="AUTO"/>
         </id>
+        <field name="songId" type="integer" column="song_id"/>
         <field name="songDetails" column="song_details" type="string" length="255" nullable="true"/>
         <field name="score" column="score" type="float" nullable="true"/>
     </entity>
