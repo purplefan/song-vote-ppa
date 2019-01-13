@@ -38,7 +38,7 @@ class VotingServiceTest extends TestCase
     {
         $id = 1;
         $score = 4;
-        $song = new Song("some song");
+        $song = new Song(1,"some song");
         $this->voteRepository->expects($this->once())->method('findSong')->with($id)->willReturn($song);
         $this->voteRepository->expects($this->once())
             ->method('saveVote')
@@ -50,7 +50,7 @@ class VotingServiceTest extends TestCase
     {
         $id = 1;
         $score = 4;
-        $song = new Song("some song");
+        $song = new Song(1,"some song");
         $this->voteRepository->expects($this->once())->method('findSong')->with($id)->willReturn(null);
         $this->songRepository->expects($this->once())->method('findSong')->with($id)->willReturn($song);
         $this->voteRepository->expects($this->once())
