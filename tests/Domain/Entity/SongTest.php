@@ -25,6 +25,7 @@ class SongTest extends TestCase
     {
         $song = new Song(3,"some song");
         $song->vote(2);
+        $song->vote(3);
         $song->vote(4);
         $this->assertEquals(3, $song->score());
     }

@@ -22,6 +22,11 @@ class Song
     private $songId;
 
     /**
+     * @var int
+     */
+    private $votesCount = 0;
+
+    /**
      * @var string
      */
     private $songDetails;
@@ -59,7 +64,10 @@ class Song
         if (is_null($this->score)) {
             $this->score = $score;
         } else {
-            $this->score = ($this->score + $score) / 2;
+            //calculate average:
+            $currentCount = $this->votesCount;
+            $this->score = ($this->score * $currentCount + $score) / ($currentCount +1);
         }
+        $this->votesCount++;
     }
 }
